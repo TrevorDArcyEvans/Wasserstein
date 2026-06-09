@@ -1,4 +1,6 @@
-﻿namespace Wasserstein;
+﻿using System.Numerics;
+
+namespace Wasserstein;
 
 public static class Program
 {
@@ -15,12 +17,12 @@ public static class Program
     Console.WriteLine($"Wasserstein(P, Q2) = {wass_p_q2:F4}");
   }
 
-  private static int FirstNonZero(double[] vec)
+  private static int FirstNonZero<T>(T[] vec) where T:INumber<T>
   {
     var dim = vec.Length;
     for (var i = 0; i < dim; ++i)
     {
-      if (vec[i] > 0.0)
+      if (vec[i] > T.Zero)
       {
         return i;
       }
@@ -29,33 +31,33 @@ public static class Program
     return -1;
   }
 
-  private static double MoveDirt(double[] dirt, int di, double[] holes, int hi)
+  private static T MoveDirt<T>(T[] dirt, int di, T[] holes, int hi) where  T : INumber<T>
   {
-    var flow = 0.0;
+    var flow = T.Zero;
     var dist = 0;
     if (dirt[di] <= holes[hi])
     {
       flow = dirt[di];
-      dirt[di] = 0.0;
+      dirt[di] = T.Zero;
       holes[hi] -= flow;
     }
     else if (dirt[di] > holes[hi])
     {
       flow = holes[hi];
       dirt[di] -= flow;
-      holes[hi] = 0.0;
+      holes[hi] = T.Zero;
     }
 
     dist = Math.Abs(di - hi);
 
-    return flow * dist;
+    return flow * (T)Convert.ChangeType(dist, typeof(T));
   }
 
-  private static double Wasserstein(double[] p, double[] q)
+  private static T Wasserstein<T>(T[] p, T[] q) where  T : INumber<T>
   {
-    var dirt = (double[]) p.Clone();
-    var holes = (double[]) q.Clone();
-    var totalWork = 0.0;
+    var dirt = (T[]) p.Clone();
+    var holes = (T[]) q.Clone();
+    var totalWork = T.Zero;
     while (true)
     {
       var fromIdx = FirstNonZero(dirt);
