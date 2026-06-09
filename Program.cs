@@ -31,24 +31,24 @@ public static class Program
     return -1;
   }
 
-  private static T MoveDirt<T>(T[] dirt, int di, T[] holes, int hi) where  T : INumber<T>
+  private static T MoveDirt<T>(T[] dirt, int dirtIdx, T[] holes, int holeIdx) where  T : INumber<T>
   {
     var flow = T.Zero;
     var dist = 0;
-    if (dirt[di] <= holes[hi])
+    if (dirt[dirtIdx] <= holes[holeIdx])
     {
-      flow = dirt[di];
-      dirt[di] = T.Zero;
-      holes[hi] -= flow;
+      flow = dirt[dirtIdx];
+      dirt[dirtIdx] = T.Zero;
+      holes[holeIdx] -= flow;
     }
-    else if (dirt[di] > holes[hi])
+    else if (dirt[dirtIdx] > holes[holeIdx])
     {
-      flow = holes[hi];
-      dirt[di] -= flow;
-      holes[hi] = T.Zero;
+      flow = holes[holeIdx];
+      dirt[dirtIdx] -= flow;
+      holes[holeIdx] = T.Zero;
     }
 
-    dist = Math.Abs(di - hi);
+    dist = Math.Abs(dirtIdx - holeIdx);
 
     return flow * (T)Convert.ChangeType(dist, typeof(T));
   }
