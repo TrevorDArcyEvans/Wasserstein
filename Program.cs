@@ -13,8 +13,8 @@ public static class Program
     var wass_p_q1 = Wasserstein(P, Q1);
     var wass_p_q2 = Wasserstein(P, Q2);
 
-    Console.WriteLine("Wasserstein(P, Q1) = " + wass_p_q1.ToString("F4"));
-    Console.WriteLine("Wasserstein(P, Q2) = " + wass_p_q2.ToString("F4"));
+    Console.WriteLine($"Wasserstein(P, Q1) = {wass_p_q1:F4}");
+    Console.WriteLine($"Wasserstein(P, Q2) = {wass_p_q2:F4}");
 
     Console.WriteLine("\nEnd demo ");
   } // Main
