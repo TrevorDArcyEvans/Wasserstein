@@ -10,8 +10,8 @@ public static class Program
     var Q1 = new[] {0.1, 0.1, 0.6, 0.1, 0.1};
     var Q2 = new[] {0.1, 0.1, 0.1, 0.1, 0.6};
 
-    var wass_p_q1 = MyWasserstein(P, Q1);
-    var wass_p_q2 = MyWasserstein(P, Q2);
+    var wass_p_q1 = Wasserstein(P, Q1);
+    var wass_p_q2 = Wasserstein(P, Q2);
 
     Console.WriteLine("Wasserstein(P, Q1) = " + wass_p_q1.ToString("F4"));
     Console.WriteLine("Wasserstein(P, Q2) = " + wass_p_q2.ToString("F4"));
@@ -55,7 +55,7 @@ public static class Program
     return flow * dist;
   }
 
-  private static double MyWasserstein(double[] p, double[] q)
+  private static double Wasserstein(double[] p, double[] q)
   {
     var dirt = (double[]) p.Clone();
     var holes = (double[]) q.Clone();
