@@ -1,6 +1,6 @@
-﻿using System.Numerics;
+﻿namespace Wasserstein;
 
-namespace Wasserstein;
+using System.Numerics;
 
 public static class Program
 {
